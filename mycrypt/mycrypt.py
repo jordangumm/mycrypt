@@ -5,7 +5,7 @@ from datautils import get_password
 
 def decrypt_message(message):
     """ Returns decrypted String message """
-    if type(message) not type(''): exit('Message not of type String')
+    if type(message) != type(''): exit('Message not of type String')
     password = get_password()
     return decrypt(password, message)
 
@@ -22,7 +22,7 @@ def decrypt_file(input_fp, output_fp):
 
 def encrypt_message(message):
     """ Returns encrypted String message """
-    if type(message) not type(''): exit('Message not of type String')
+    if type(message) != type(''): exit('Message not of type String')
     password = get_password()
     return encrypt(password, message)
 

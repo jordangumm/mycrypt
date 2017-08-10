@@ -1,10 +1,15 @@
+import random
+import string
 import yaml
 import os
 
 
 def get_config_path():
-    return os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                              'data', 'config.yml')
+    config_fp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.yml')
+    if not os.path.exists(config_fp):
+        with open(config_fp, 'w+') as output:
+            output.write(yaml.dump({}))
+    return config_fp
 
 
 def get_config():
@@ -13,7 +18,8 @@ def get_config():
 
 
 def save_config(config):
-    yaml.dump(config, get_config_path())
+    with open(get_config_path(), 'w+') as output:
+        output.write(yaml.dump(config))
 
 
 def get_password():
@@ -46,7 +52,8 @@ def get_output_path():
         path = 'asdf;lkj'
         while not os.path.exists(path):
             path = raw_input('Enter file path to save encryption information: ')
-        set_output_path(path)
+        config['output_path'] = path
+        save_config(config)
         return path
     return config['output_path']
 
@@ -60,4 +67,6 @@ def get_storage_json():
 
 def get_storage_path():
     """ Return path to where encrypted files are stored """
-    return os.path.join(get_output_path(), 'files')
+    storage_dp = os.path.join(get_output_path(), 'files')
+    if not os.path.exists(storage_dp): os.mkdir(storage_dp)
+    return storage_dp

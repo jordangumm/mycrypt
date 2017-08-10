@@ -10,7 +10,7 @@ def save_file(input_fp):
     output_fp = os.path.join(get_storage_path(), input_fp.split('/')[-1])
     while os.path.exists(output_fp):
         output_fp = output_fp + '~'
-    encrypt_file(input_fp, get_storage_path() + input_fp.split('/')[-1])
+    encrypt_file(input_fp, os.path.join(get_storage_path(), input_fp.split('/')[-1]))
 
 
 def restore_file(file_name, output_fp=None):
@@ -20,14 +20,8 @@ def restore_file(file_name, output_fp=None):
     decrypt_file(input_fp, output_fp)
 
 
-def save_password():
+def save_message():
     pass
 
-def restore_password():
-    pass
-
-def save_key():
-    pass
-
-def restore_key()
+def restore_message():
     pass

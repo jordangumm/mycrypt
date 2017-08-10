@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import click
+import mycrypt
+
+
+@click.command()
+@click.argument('input_fp')
+@click.option('--output_fp', '-o', default=None)
+def run(input_fp, output_fp):
+    """ Encrypt file and store in crypt backup directory """
+    mycrypt.restore_file(input_fp, output_fp)
+
+
+if __name__ == "__main__":
+    run()
